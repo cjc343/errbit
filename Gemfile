@@ -5,6 +5,9 @@ gem 'rails', '3.2.8'
 gem 'nokogiri'
 gem 'mongoid', '~> 2.4.10'
 
+# force SSL
+gem 'rack-ssl', :require => 'rack/ssl'
+
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 
@@ -24,12 +27,17 @@ gem 'octokit', '~> 1.0.0'
 
 gem 'inherited_resources'
 gem 'SystemTimer', :platform => :ruby_18
-gem 'hoptoad_notifier', "~> 2.4"
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari'
 gem 'rack-ssl-enforcer'
 gem 'fabrication', "~> 1.3.0"   # Both for tests, and loading demo data
 gem 'rails_autolink', '~> 1.0.9'
+gem 'campy'
+gem 'hipchat'
+
+# Please don't update this to airbrake - We override the send_notice method
+# to handle internal errors.
+gem 'hoptoad_notifier', "~> 2.4"
 
 platform :ruby do
   gem 'mongo', '= 1.6.2'
@@ -38,7 +46,7 @@ platform :ruby do
 end
 
 gem 'ri_cal'
-gem 'yajl-ruby'
+gem 'yajl-ruby', :require => "yajl"
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.6'
@@ -46,6 +54,7 @@ group :development, :test do
   unless ENV["CI"]
     gem 'ruby-debug', :platform => :mri_18
     gem 'debugger', :platform => :mri_19
+    gem 'pry'
   end
 #  gem 'rpm_contrib'
 #  gem 'newrelic_rpm'
@@ -58,6 +67,7 @@ group :test do
   gem 'rspec', '~> 2.6'
   gem 'database_cleaner', '~> 0.6.0'
   gem 'email_spec'
+  gem 'timecop'
 end
 
 group :heroku do
